@@ -1,4 +1,4 @@
-const {saveVendorDAO, getVendorDAO} = require("../dao/vendorDAO")
+const {saveVendorDAO, getVendorDAO, updateVendorDAO} = require("../dao/vendorDAO")
 
 async function saveVendorService(req){
     const data = req.body.data
@@ -6,8 +6,11 @@ async function saveVendorService(req){
     return result
 }
 
-function updateVendorService(req){
-    
+async function updateVendorService(req){
+    const data = req.body.data
+    const id = req.query.id
+    const result = await updateVendorDAO(id,data)
+    return result
 }
 
 async function getVendorService(req){
