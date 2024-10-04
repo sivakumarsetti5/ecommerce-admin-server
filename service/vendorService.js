@@ -1,4 +1,4 @@
-const {saveVendorDAO, getVendorDAO, updateVendorDAO} = require("../dao/vendorDAO")
+const {saveVendorDAO, getVendorDAO, updateVendorDAO, deleteVendorDAO} = require("../dao/vendorDAO")
 
 async function saveVendorService(req){
     const data = req.body.data
@@ -18,8 +18,10 @@ async function getVendorService(req){
     return result
 }
 
-function deleteVendorService(req){
-    
+async function deleteVendorService(req){
+    const{id}=req.params
+    const result = await deleteVendorDAO(id)
+    return result
 }
 
 module.exports = {saveVendorService,updateVendorService,getVendorService,deleteVendorService}

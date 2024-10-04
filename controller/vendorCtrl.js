@@ -1,5 +1,5 @@
 var express = require('express')
-const {saveVendorService, getVendorService, updateVendorService} = require('../service/vendorService')
+const {saveVendorService, getVendorService, updateVendorService, deleteVendorService} = require('../service/vendorService')
 var router = express.Router()
 
 router.post('/save',async function(req,res,next){
@@ -26,8 +26,15 @@ router.put('/update',async function(req,res,next){
 // http://localhost:2020/vendor/update?id={...........}
 })
 
-router.delete('/delete',function(req,res,next){
-    
+router.delete('/delete/:id',async function(req,res,next){
+    try{
+        const result = await deleteVendorService(req)
+        res.send(result)
+        }
+        catch(ex){
+            res.send(ex?.message)
+        } 
+// http://localhost:2020/vendor/delete?{id}        
 })
 
 module.exports = router

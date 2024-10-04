@@ -24,8 +24,11 @@ async function getVendorDAO(){
     return result
 }
 
-function deleteVendorDAO(){
-    
+async function deleteVendorDAO(id){
+    const db = await getDB()
+    const collection = db.collection("vendors")
+    const result = await collection.deleteOne({_id:ObjectId.createFromHexString(id)})
+    return result
 }
 
 module.exports = {saveVendorDAO,updateVendorDAO,getVendorDAO,deleteVendorDAO}
